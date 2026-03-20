@@ -27,10 +27,8 @@ async function getProducts() {
     try {
         const response = await fetch(`${API_BASE_URL}/products`);
         const data = await response.json();
-
-        // console.log('Raw API response:', data); // uncomment to debug
-
-        // Handle both formats: array OR { products: [...] } OR { data: [...] }
+        console.log('🔴 Raw API data:', data);        // 👈 add this
+        console.log('🔴 Status:', response.status);   // 👈 and this
         productsCache = Array.isArray(data) ? data : data.products || data.data || [];
         return productsCache;
     } catch (error) {
