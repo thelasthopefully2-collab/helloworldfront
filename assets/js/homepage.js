@@ -1,5 +1,5 @@
 // Homepage Product Handler - Handles product buttons on the homepage
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'helloworldbackend-production-ed49.up.railway.app';
 
 // Product mapping (page -> product search term)
 const PRODUCT_MAP = {
