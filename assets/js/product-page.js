@@ -1,5 +1,5 @@
 // Product Page Handler - Handles Add to Cart and Buy buttons
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'helloworldbackend-production-ed49.up.railway.app';
 
 // Get or create session ID (same as cart.js)
 function getSessionId() {
