@@ -1,5 +1,5 @@
 // API Configuration
-const API_BASE_URL = 'https://helloworldbackend-production-ed49.up.railway.app';
+const API_BASE_URL = 'https://helloworldbackend-production-ed49.up.railway.app/api';
 
 class CartService {
     constructor() {
