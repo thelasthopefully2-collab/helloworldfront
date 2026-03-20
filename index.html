@@ -1,0 +1,669 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta name="description" content="Frávega - Las mejores ofertas en tecnología y electrodomésticos" />
+  <title>Frávega - Gran Promoción</title>
+  <meta name="theme-color" content="#440099" />
+  <link rel="icon" href="assets/images/icon.png" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Work Sans', sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header Styles */
+    .header {
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .top-bar {
+      background-color: #fff;
+      border-bottom: 1px solid #dadada;
+      padding: 8px 16px;
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .top-bar {
+        display: block;
+      }
+    }
+
+    .top-bar-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .top-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .top-links li a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: #4a4a4a;
+    }
+
+    .top-links li a svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .main-header {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1280px;
+      margin: 0 auto;
+      gap: 16px;
+    }
+
+    .logo {
+      height: 25px;
+      margin-left: 20px;
+    }
+
+    .search-bar {
+      flex: 1;
+      max-width: 600px;
+      position: relative;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 12px 16px 12px 45px;
+      border: 1px solid #dadada;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Work Sans', sans-serif;
+    }
+
+    .search-bar input:focus {
+      outline: none;
+      border-color: #440099;
+    }
+
+    .search-bar svg {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      fill: #4a4a4a;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-actions a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: #4a4a4a;
+    }
+
+    .header-actions svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+
+    .cart-icon {
+      position: relative;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #871EE3;
+      color: white;
+      font-size: 11px;
+      font-weight: 600;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Navigation */
+    .nav-bar {
+      border-top: 1px solid #dadada;
+      padding: 0 16px;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+    }
+
+    .nav-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav-item {
+      padding: 12px 0;
+      font-size: 14px;
+      color: #4a4a4a;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+
+    .nav-item:hover {
+      color: #440099;
+    }
+
+    .nav-item.highlight {
+      color: #801dd9;
+      font-weight: 600;
+    }
+
+    /* Banner Section */
+    .banner-section {
+      background: linear-gradient(135deg, #440099 0%, #871EE3 50%, #B01886 100%);
+      padding: 40px 20px;
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+    }
+
+    .banner-content {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .banner-title {
+      font-size: 48px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 16px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      .banner-title {
+        font-size: 32px;
+      }
+    }
+
+    .banner-subtitle {
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .timer-container {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .timer-box {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 20px 24px;
+      min-width: 90px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .timer-value {
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .timer-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 8px;
+      opacity: 0.8;
+    }
+
+    /* Products Section */
+    .products-section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 16px 60px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 1024px) {
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .product-badge {
+      background: #871EE3;
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 12px;
+      align-self: flex-start;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      margin-bottom: 16px;
+    }
+
+    .product-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 12px;
+      line-height: 1.4;
+      min-height: 40px;
+    }
+
+    .product-price-old {
+      font-size: 13px;
+      color: #999;
+      text-decoration: line-through;
+      margin-bottom: 4px;
+    }
+
+    .product-price {
+      font-size: 24px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .product-installments {
+      font-size: 13px;
+      color: #00a650;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    .product-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .btn-buy {
+      background: linear-gradient(135deg, #871EE3 0%, #440099 100%);
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      font-family: 'Work Sans', sans-serif;
+      width: 100%;
+    }
+
+    .btn-buy:hover {
+      opacity: 0.9;
+    }
+
+    .btn-cart {
+      background: #EAE5FF;
+      color: #7447CC;
+      border: none;
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: 'Work Sans', sans-serif;
+      width: 100%;
+    }
+
+    .btn-cart:hover {
+      background: #DDD5FF;
+    }
+
+    /* Footer */
+    .footer {
+      background: #440099;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      height: 30px;
+      filter: brightness(0) invert(1);
+      margin-bottom: 16px;
+    }
+
+    .footer-text {
+      font-size: 13px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="top-bar-content">
+        <ul class="top-links">
+          <li>
+            <a href="#">
+              <svg viewBox="0 0 25 25">
+                <path
+                  d="M10.1 16.039c1.071 0 1.94.886 1.94 1.98 0 1.094-.869 1.981-1.94 1.981-1.073 0-1.942-.887-1.942-1.98 0-1.095.869-1.981 1.941-1.981zm9.964 0c1.072 0 1.941.886 1.941 1.98 0 1.094-.869 1.981-1.941 1.981s-1.941-.887-1.941-1.98c0-1.095.869-1.981 1.941-1.981zM15.956 7c.21 0 .383.165.383.367v6.712c0 .203.172.367.382.367.212 0 .383-.163.383-.367V8.837c0-.203.173-.368.383-.368h2.682c.14 0 .268.072.336.19l1.888 3.26 1.495 1.433c.071.067.111.16.112.259v4.04c0 .203-.172.368-.383.368h-.672c0-.374-.076-.728-.2-1.057-.27-.93-1.07-1.643-2.068-1.829-.205-.046-.416-.076-.636-.076-1.603 0-2.903 1.326-2.903 2.962h-4.226c0-1.636-1.3-2.962-2.904-2.962-1.603 0-2.903 1.326-2.903 2.962h-.547c-.207.005-.378-.16-.383-.368V7.367c0-.202.172-.367.383-.367z" />
+              </svg>
+              <span data-i18n="header.trackOrder">Seguí tu compra</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <svg viewBox="0 0 25 25">
+                <path
+                  d="M12.5 15.667c-1.746 0-3.167-1.421-3.167-3.167 0-1.746 1.42-3.167 3.167-3.167 1.746 0 3.167 1.421 3.167 3.167 0 1.746-1.42 3.167-3.167 3.167m9.104-4.75h-2.26c-.158-.626-.36-1.32-.616-1.847l1.609-1.608c.155-.155.155-.405 0-.56l-2.24-2.238c-.154-.156-.404-.156-.56 0L15.93 6.272c-.528-.257-1.221-.458-1.846-.615V3.396c0-.219-.177-.396-.396-.396h-2.374c-.219 0-.396.177-.396.396v2.26c-.626.158-1.32.36-1.846.616l-1.61-1.608c-.154-.156-.405-.156-.559 0l-2.24 2.238c-.154.154-.154.405 0 .56l1.61 1.61c-.255.524-.458 1.218-.616 1.845h-2.26c-.219 0-.396.177-.396.396v2.374c0 .219.177.396.396.396h2.26c.158.627.361 1.32.616 1.847l-1.61 1.609c-.155.154-.155.404 0 .559l2.24 2.239c.149.149.412.149.56 0l1.61-1.609c.523.256 1.218.457 1.845.617v2.26c0 .218.177.395.396.395h2.374c.219 0 .396-.177.396-.396v-2.26c.626-.16 1.32-.36 1.846-.616l1.61 1.609c.154.155.404.155.559 0l2.239-2.24c.155-.154.155-.404 0-.558l-1.609-1.61c.256-.525.458-1.22.616-1.846h2.26c.219 0 .396-.177.396-.396v-2.374c0-.219-.177-.396-.396-.396" />
+              </svg>
+              <span data-i18n="header.techService">Servicio técnico</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <svg viewBox="0 0 25 25">
+                <path
+                  d="M6.594 12.33l.049.058c.695.804 1.684 1.314 2.716 1.399 1.012.083 2-.23 2.778-.888l.055-.046.054.046c.784.662 1.77.973 2.784.887 1.027-.085 2.014-.594 2.708-1.395l.05-.059.063.044c.555.385 1.172.578 1.802.547l.088.643-.001 6.864-.014-.63-.001.128h-5.516l.001-3.585c0-.262-.225-.475-.504-.475l-3.053.01c-.228.043-.399.239-.399.465v3.585H5.36c-.29 0-.565-.027-.717.479v-6.845l.088-.642.108.002c.583 0 1.165-.189 1.691-.549l.064-.042zM19.41 5.76c.172 0 .327.097.403.252l1.516 3.046.046.143.007.276c0 .335-.062.656-.169.956-.2.478-.533.93-.975 1.113-.73.302-1.546.103-2.184-.534l-.01-.01c-.11-.106-.254-.156-.398-.134-.155.018-.29.102-.371.233-.53.847-1.381 1.376-2.336 1.453-.908.072-1.769-.284-2.372-.972-.19-.218-.561-.22-.753 0-.552.631-1.32.982-2.135.982-.076 0-.154-.003-.231-.01-.958-.076-1.811-.606-2.342-1.453-.081-.131-.216-.216-.37-.234-.15-.019-.3.035-.406.142l-.083.08c-.634.586-1.433.75-2.138.439-.467-.205-.804-.712-.99-1.222-.067-.225-.108-.463-.118-.71L3 9.265l.004-.05c.007-.037.014-.062.02-.084l.005-.016 1.54-3.104c.076-.155.23-.252.403-.252z" />
+              </svg>
+              <span data-i18n="header.stores">Sucursales</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <svg viewBox="0 0 25 25">
+                <path
+                  d="M17.123 6.054l-6.284-.04L7.945 6c-.337 0-.66.04-.97.122-1.683.405-2.935 1.93-2.948 3.754L4 14.266c0 .675.162 1.31.458 1.863.054.108.12.216.188.324.135.203.296.405.471.58.7.717 1.67 1.162 2.747 1.162l1.588.014-.013 1.526-.013 2.336 5.17-3.835 2.446.027c2.154.013 3.918-1.729 3.931-3.89l.013-2.147L21 9.984c.013-2.16-1.723-3.916-3.877-3.93z" />
+              </svg>
+              <span data-i18n="header.helpCenter">Centro de ayuda</span>
+            </a>
+          </li>
+        </ul>
+        <a href="#" style="display: flex; align-items: center; gap: 6px; font-size: 14px; color: #4a4a4a;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 28 28" style="fill: #4a4a4a;">
+            <path
+              d="M23.108 4.892C20.675 2.46 17.44 1.12 14 1.12c-3.44 0-6.675 1.34-9.108 3.772C2.46 7.325 1.12 10.56 1.12 14c0 3.44 1.34 6.675 3.772 9.108C7.325 25.54 10.56 26.88 14 26.88c3.44 0 6.675-1.34 9.108-3.772C25.54 20.675 26.88 17.44 26.88 14c0-3.44-1.34-6.675-3.772-9.108zM7.578 23.378c.538-3.102 3.226-5.39 6.422-5.39 3.197 0 5.884 2.288 6.423 5.39-1.829 1.256-4.041 1.993-6.423 1.993-2.382 0-4.594-.737-6.423-1.993zm2.327-10.995c0-2.258 1.837-4.095 4.095-4.095s4.095 1.837 4.095 4.095S16.258 16.48 14 16.48s-4.095-1.838-4.095-4.096zm11.825 9.948c-.406-1.444-1.213-2.754-2.344-3.778-.693-.628-1.483-1.123-2.332-1.472 1.534-1.001 2.55-2.733 2.55-4.698 0-3.09-2.514-5.604-5.604-5.604-3.09 0-5.605 2.514-5.605 5.604 0 1.965 1.017 3.697 2.551 4.698-.849.349-1.639.844-2.332 1.472-1.131 1.023-1.938 2.334-2.344 3.778C4.032 20.253 2.63 17.287 2.63 14 2.63 7.73 7.73 2.63 14 2.63S25.37 7.73 25.37 14c0 3.287-1.402 6.253-3.64 8.33z" />
+          </svg>
+          <span data-i18n="header.myAccount">Mi cuenta</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Main Header -->
+    <div class="main-header">
+      <a href="index.html">
+        <img src="assets/images/Logo.webp" alt="Frávega" class="logo" />
+      </a>
+      <div class="search-bar">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+        </svg>
+        <input type="text" placeholder="Fijate en Frávega" data-i18n-placeholder="header.searchPlaceholder" />
+      </div>
+      <div class="header-actions">
+        <a href="Cart.html" class="cart-icon">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
+          </svg>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="nav-bar">
+      <div class="nav-content">
+        <a href="#" class="nav-item highlight" data-i18n="nav.bestSellers">Más Vendidos</a>
+        <a href="#" class="nav-item" data-i18n="nav.deals">Ofertas</a>
+        <a href="#" class="nav-item highlight" data-i18n="nav.climate">Climatización</a>
+        <a href="#" class="nav-item" data-i18n="nav.coupons">CUPONERA</a>
+        <a href="#" class="nav-item highlight" data-i18n="nav.tvSpecial">Especial TV</a>
+        <a href="#" class="nav-item" data-i18n="nav.admiral">ADMIRAL</a>
+        <a href="#" class="nav-item highlight" data-i18n="nav.bargains">GANGAS</a>
+        <a href="#" class="nav-item" data-i18n="nav.officialStores">Tiendas Oficiales</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Big Promotion Banner -->
+  <section class="banner-section">
+    <div class="banner-content">
+      <h1 class="banner-title" data-i18n="banner.title">🔥 GRAN PROMOCIÓN 🔥</h1>
+      <p class="banner-subtitle" data-i18n="banner.subtitle">¡No te pierdas las ofertas más increíbles del año!</p>
+      <div class="timer-container">
+        <div class="timer-box">
+          <div class="timer-value" id="days">00</div>
+          <div class="timer-label" data-i18n="timer.days">Días</div>
+        </div>
+        <div class="timer-box">
+          <div class="timer-value" id="hours">00</div>
+          <div class="timer-label" data-i18n="timer.hours">Horas</div>
+        </div>
+        <div class="timer-box">
+          <div class="timer-value" id="minutes">00</div>
+          <div class="timer-label" data-i18n="timer.minutes">Minutos</div>
+        </div>
+        <div class="timer-box">
+          <div class="timer-value" id="seconds">00</div>
+          <div class="timer-label" data-i18n="timer.seconds">Segundos</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section class="products-section">
+    <h2 class="section-title" data-i18n="products.sectionTitle">Productos en Promoción</h2>
+    <div class="products-grid">
+      <!-- Product 1 -->
+      <div class="product-card">
+        <span class="product-badge">88% OFF</span>
+        <a href="Iphone.html">
+          <img src="assets/images/Iphone/product.jpg" alt="iPhone 17 Pro Max" class="product-image" />
+        </a>
+        <h3 class="product-name" data-i18n="prod.iphone">iPhone 17 Pro Max 256GB 6.3 Pulgadas</h3>
+        <p class="product-price-old">$5.500.000</p>
+        <p class="product-price">$675.000</p>
+        <p class="product-installments">12 <span data-i18n="products.installments">cuotas sin interés de</span> $125.000
+        </p>
+        <div class="product-buttons">
+          <a href="Cart.html"><button class="btn-buy" data-i18n="products.buy">Comprar</button></a>
+          <button class="btn-cart" data-i18n="products.addToCart">Agregar al carrito</button>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-card">
+        <span class="product-badge">62% OFF</span>
+        <a href="SamsungTV.html">
+          <img src="assets/images/SamsngTV/TV1.webp" alt="Smart TV" class="product-image" />
+        </a>
+        <h3 class="product-name" data-i18n="prod.samsung">Smart TV Samsung 65" LED Crystal UHD 4K DU7000</h3>
+        <p class="product-price-old">$1.299.000</p>
+        <p class="product-price">$499.000</p>
+        <p class="product-installments">12 <span data-i18n="products.installments">cuotas sin interés de</span> $58.250
+        </p>
+        <div class="product-buttons">
+          <a href="Cart.html"><button class="btn-buy" data-i18n="products.buy">Comprar</button></a>
+          <button class="btn-cart" data-i18n="products.addToCart">Agregar al carrito</button>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-card">
+        <span class="product-badge">77% OFF</span>
+        <a href="MacBook.html">
+          <img src="assets/images/MacBook/Pic1.webp" alt="MacBook" class="product-image" />
+        </a>
+        <h3 class="product-name" data-i18n="prod.macbook">Macbook Air 15 M4 10cpu 10gpu 24gb 512gb - Medianoche</h3>
+        <p class="product-price-old">$4.878.999</p>
+        <p class="product-price">$1.099.000</p>
+        <p class="product-installments">12 <span data-i18n="products.installments">cuotas sin interés de</span> $175.000
+        </p>
+        <div class="product-buttons">
+          <a href="Cart.html"><button class="btn-buy" data-i18n="products.buy">Comprar</button></a>
+          <button class="btn-cart" data-i18n="products.addToCart">Agregar al carrito</button>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="product-card">
+        <span class="product-badge">65% OFF</span>
+        <a href="Tablet.html">
+          <img src="assets/images/Tablet/Img1.webp" alt="iPad Air" class="product-image" />
+        </a>
+        <h3 class="product-name" data-i18n="prod.tablet">iPad Air 11 Apple Wi-fi + 4G 256GB Space Grey</h3>
+        <p class="product-price-old">$2.299.999</p>
+        <p class="product-price">$799.000</p>
+        <p class="product-installments">12 <span data-i18n="products.installments">cuotas sin interés de</span> $100.000
+        </p>
+        <div class="product-buttons">
+          <a href="Cart.html"><button class="btn-buy" data-i18n="products.buy">Comprar</button></a>
+          <button class="btn-cart" data-i18n="products.addToCart">Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <img src="assets/images/Logo.webp" alt="Frávega" class="footer-logo" />
+    <p class="footer-text" data-i18n="footer.rights">© 2026 Frávega S.A.C.I. e I. - Todos los derechos reservados</p>
+  </footer>
+
+  <!-- Timer Script -->
+  <script>
+    // Set the promotion end date (30 minutes from now)
+    const endDate = new Date();
+    endDate.setMinutes(endDate.getMinutes() + 30);
+
+    function updateTimer() {
+      const now = new Date();
+      const diff = endDate - now;
+
+      if (diff <= 0) {
+        document.getElementById('days').textContent = '00';
+        document.getElementById('hours').textContent = '00';
+        document.getElementById('minutes').textContent = '00';
+        document.getElementById('seconds').textContent = '00';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = days.toString().padStart(2, '0');
+      document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+      document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    }
+
+    // Update timer every second
+    updateTimer();
+    setInterval(updateTimer, 1000);
+  </script>
+
+  <!-- Cart Notification System -->
+  <script src="assets/js/cart-notification.js"></script>
+  <!-- Homepage Product Handler -->
+  <script src="assets/js/homepage.js"></script>
+  <!-- Translation System -->
+  <script src="assets/js/translations.js"></script>
+  <script src="assets/js/i18n.js"></script>
+</body>
+
+</html>

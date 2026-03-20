@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es" translate="no">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finalizar la compra - Frávega</title>
+    <link rel="icon" href="assets/images/icon.png" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        .header {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            margin-left: 20px;
+        }
+
+        .header-logo img {
+            height: 25px;
+        }
+
+        .header-secure {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .header-secure svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .header-secure span {
+            font-size: 10px;
+            font-weight: 500;
+            color: #666;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            gap: 0;
+            align-items: stretch;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* Left Section - Email Form */
+        .email-section {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .email-title {
+            font-size: 22px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .email-subtitle {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .email-input {
+            max-width: 60%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: #440099;
+        }
+
+        .btn-continue {
+            width: fit-content;
+            padding: 14px 40px;
+            background: #440099;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-continue:hover {
+            background: #330077;
+        }
+
+        /* Right Section - Info */
+        .info-section {
+            width: 35%;
+            padding: 40px;
+            background: #fafafa;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-title {
+            color: #440099;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-item svg {
+            width: 16px;
+            height: 16px;
+            color: #00a650;
+            flex-shrink: 0;
+        }
+
+        .info-item p {
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* Product Preview */
+        .product-preview {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .product-preview-image {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+        }
+
+        .product-preview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .product-preview-info {
+            flex: 1;
+        }
+
+        .product-preview-info h4 {
+            font-size: 14px;
+            font-weight: 400;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .product-preview-price {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .product-qty {
+            background: #440099;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: -8px;
+            right: -8px;
+        }
+
+        .product-img-container {
+            position: relative;
+        }
+
+        /* Footer */
+        .footer {
+            background: #fff;
+            padding: 40px;
+            margin-top: 50px;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-text {
+            flex: 1;
+        }
+
+        .footer-text img {
+            height: 33px;
+            margin-bottom: 20px;
+        }
+
+        .footer-text p {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .footer-logos {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .footer-logos img {
+            height: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+
+            .info-section {
+                width: 100%;
+            }
+
+            .email-input {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <img src="assets/images/Logo.webp" alt="Frávega" />
+        </a>
+        <div class="header-secure">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <span>SITIO SEGURO</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <h1 class="page-title">Mi Carrito</h1>
+
+        <div class="content-wrapper">
+            <!-- Email Form Section -->
+            <section class="email-section">
+                <p class="email-title">Ingresa tu mail para continuar la compra.</p>
+                <p class="email-subtitle">Rápido. Fácil. Seguro.</p>
+                <input type="email" class="email-input" placeholder="su@correo.com" />
+                <button class="btn-continue">Continuar</button>
+            </section>
+
+            <!-- Info Section -->
+            <aside class="info-section">
+                <p class="info-title">Guardamos su correo electrónico de manera 100% segura para:</p>
+                
+                <div class="info-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <p>Identificar su perfil</p>
+                </div>
+                
+                <div class="info-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <p>Notificar sobre los estados de su compra</p>
+                </div>
+                
+                <div class="info-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <p>Guardar el historial de compras</p>
+                </div>
+                
+                <div class="info-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <p>Facilitar el proceso de compras</p>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Product Preview -->
+        <div class="product-preview" id="product-preview">
+            <div class="product-img-container" style="position: relative;">
+                <div style="width: 80px; height: 80px; background: #f0f0f0; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
+                    <div style="width: 24px; height: 24px; border: 2px solid #ddd; border-top-color: #440099; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                </div>
+            </div>
+            <div class="product-preview-info">
+                <h4 style="color: #999;">Cargando productos...</h4>
+                <p class="product-preview-price" style="color: #999;">$ ---</p>
+            </div>
+        </div>
+        <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                <img src="assets/images/Logo.webp" alt="Frávega" />
+                <p>Copyright 1972-2024 | Todos los derechos reservados Fravega.com. Frávega S.A.C.I. e I. Valentín Gómez 2813 (1191) | Capital Federal | Argentina</p>
+                <p>Las fotos son a modo ilustrativo. La venta de cualquiera de los productos publicados está sujeta a la verificación de stock.</p>
+            </div>
+            <div class="footer-logos">
+                <img src="https://images.fravega.com/f300/84e015d55939d4f5961bf5dcb4989d78.png" alt="CAECE" />
+                <img src="https://www.argentina.gob.ar/sites/default/files/aaip-isologo.png" alt="AAIP" style="height: 40px;" />
+                <img src="https://images.fravega.com/f300/32cbb64340160607a44b6b5c35688bd6.png" alt="Data Fiscal" style="height: 45px;" />
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/checkout.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            const emailInput = document.querySelector('.email-input');
+            const continueBtn = document.querySelector('.btn-continue');
+            const productPreview = document.getElementById('product-preview');
+
+            CheckoutAPI.showLoading('Cargando tu carrito...');
+
+            try {
+                // Load cart data
+                const cart = await CheckoutAPI.getCart();
+                console.log('Cart loaded:', cart);
+                
+                if (!cart.items || cart.items.length === 0) {
+                    CheckoutAPI.hideLoading();
+                    CheckoutAPI.showToast('Tu carrito está vacío', true);
+                    setTimeout(() => window.location.href = 'Cart.html', 1500);
+                    return;
+                }
+
+                // Render product preview
+                if (productPreview && cart.items[0]) {
+                    const firstItem = cart.items[0];
+                    const totalQty = cart.items.reduce((sum, item) => sum + item.quantity, 0);
+                    const imageSrc = firstItem.productId?.image ? CheckoutAPI.fixImagePath(firstItem.productId.image) : 'assets/images/Iphone/product.jpg';
+                    const productName = firstItem.productId?.name || 'Producto';
+                    
+                    productPreview.innerHTML = `
+                        <div class="product-img-container" style="position: relative;">
+                            <img src="${imageSrc}" alt="${productName}" 
+                                 class="product-preview-image" style="width: 80px; height: 80px; object-fit: contain;"
+                                 onerror="this.src='assets/images/Iphone/product.jpg'" />
+                            <span class="product-qty">${totalQty}</span>
+                        </div>
+                        <div class="product-preview-info">
+                            <h4>${productName}${cart.items.length > 1 ? ` y ${cart.items.length - 1} más` : ''}</h4>
+                            <p class="product-preview-price">${CheckoutAPI.formatPrice(cart.total)}</p>
+                        </div>
+                    `;
+                    console.log('Product preview rendered with image:', imageSrc);
+                }
+
+                // Check for existing pending order
+                const pendingOrder = await CheckoutAPI.getPendingOrder();
+                if (pendingOrder && pendingOrder.customer?.email) {
+                    emailInput.value = pendingOrder.customer.email;
+                }
+
+                CheckoutAPI.hideLoading();
+
+                CheckoutAPI.hideLoading();
+
+            } catch (error) {
+                CheckoutAPI.hideLoading();
+                CheckoutAPI.showToast('Error al cargar los datos. Verifica tu conexión.', true);
+                console.error('Error loading checkout:', error);
+            }
+
+            // Handle continue button
+            continueBtn.addEventListener('click', async function(e) {
+                e.preventDefault();
+                
+                const email = emailInput.value.trim();
+                if (!email || !email.includes('@') || !email.includes('.')) {
+                    CheckoutAPI.showToast('Por favor ingresa un correo electrónico válido', true);
+                    emailInput.focus();
+                    return;
+                }
+
+                try {
+                    continueBtn.disabled = true;
+                    continueBtn.textContent = 'Procesando...';
+                    CheckoutAPI.showLoading('Guardando tu email...');
+                    
+                    await CheckoutAPI.startCheckout(email);
+                    window.location.href = 'Infos.html';
+                } catch (error) {
+                    CheckoutAPI.hideLoading();
+                    CheckoutAPI.showToast('Error al procesar: ' + error.message, true);
+                    continueBtn.disabled = false;
+                    continueBtn.textContent = 'Continuar';
+                }
+            });
+
+            // Allow pressing Enter to continue
+            emailInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    continueBtn.click();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

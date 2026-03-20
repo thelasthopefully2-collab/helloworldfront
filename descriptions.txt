@@ -1,0 +1,73 @@
+
+--- SamsungTV.html ---
+Descripción del producto</h3>
+            <div style="max-height:500px" class="sc-a459b27b-2 igdjJf">
+              <div class="sc-90372c66-0 jKgPYi">
+                <div class="sc-90372c66-5 kmQrNM">
+                  <p>¡Hola! Te presentamos el Smart TV Samsung 65" Crystal UHD 4K DU7000, un televisor que transforma tu
+                    experiencia de entretenimiento en el hogar. Descubrí sus principales características:</p>
+                  <p><br /></p>
+                  <p>Pantalla: Cuenta con una impresionante pantalla de 65 pulgadas con tecnología Crystal UHD 4K, que
+                    ofrece imágenes nítidas con más de 8 millones de píxeles y colores vibrantes.</p>
+                  <p><br /></p>
+                  <p>Procesador: Equipado con el Crystal Processor 4K, optimiza automáticamente el color, contraste y
+                    HDR para una calidad de imagen superior.</p>
+                  <p><br /></p>
+                  <p>HDR: Compatible con HDR10+, brinda un rango dinámico amplio que revela detalles ocultos en escenas
+                    oscuras y brillantes.</p>
+                  <p><br /></p>
+                  <p>Smart TV: Con sistema operativo Tizen, accedé a tus apps favoritas como Netflix, Disney+, YouTube,
+                    Prime Video y mucho más.</p>
+                  <p><br /></p>
+                  <p>Sonido: Sistema de audio de 20W con tecnología Dolby Digital Plus para un sonido envolvente y
+                    claro.</p>
+ 
+
+--- MacBook.html ---
+Descripción del producto</h3>
+        <div style="max-height:500px" class="sc-a459b27b-2 igdjJf">
+          <div class="sc-90372c66-0 jKgPYi">
+            <div class="sc-90372c66-5 kmQrNM">
+              <p>¡Hola! Te presentamos la MacBook Air 15" con chip M4, una laptop diseñada para potenciar tu creatividad
+                y productividad. Descubrí sus principales características:</p>
+              <p><br /></p>
+              <p>Chip Apple M4: El revolucionario chip M4 con CPU de 10 núcleos y GPU de 10 núcleos ofrece un
+                rendimiento excepcional para tareas exigentes como edición de video, desarrollo y diseño gráfico.</p>
+              <p><br /></p>
+              <p>Pantalla: Impresionante pantalla Liquid Retina de 15.3 pulgadas con resolución de 2880 x 1864 píxeles,
+                brillo de 500 nits y soporte para mil millones de colores.</p>
+              <p><br /></p>
+              <p>Memoria: 24GB de memoria unificada que permite ejecutar múltiples aplicaciones pesadas simultáneamente
+                sin pérdida de rendimiento.</p>
+              <p><br /></p>
+              <p>Almacenamiento: 512GB de almacenamiento SSD ultrarrápido para guardar todos tus proyectos, fotos y
+                archivos.</p>
+              <p><br /></p>
+              <p>Batería: Hasta 18 horas de duración de batería para trabajar todo el día sin preocuparte por el
+                cargador.</p>
+              <p><br /></p>
+              <p>Cámara y Audio: Cám
+
+--- Tablet.html ---
+Descripción del producto</h3>
+            <div style="max-height:500px" class="sc-a459b27b-2 igdjJf">
+              <div class="sc-90372c66-0 jKgPYi">
+                <div class="sc-90372c66-5 kmQrNM">
+                  <p>¡Hola! Te presentamos el iPad Air 11" con chip M2, una tablet versátil y potente para trabajo y
+                    entretenimiento. Descubrí sus principales características:</p>
+                  <p><br /></p>
+                  <p>Chip Apple M2: El potente chip M2 con CPU de 8 núcleos y GPU de 10 núcleos ofrece rendimiento de
+                    nivel profesional para edición de fotos, videos y apps exigentes.</p>
+                  <p><br /></p>
+                  <p>Pantalla: Espectacular pantalla Liquid Retina de 11 pulgadas con resolución de 2360 x 1640 píxeles,
+                    True Tone y amplia gama de colores P3.</p>
+                  <p><br /></p>
+                  <p>Almacenamiento: 256GB de capacidad para guardar todas tus apps, fotos, videos y documentos.</p>
+                  <p><br /></p>
+                  <p>Conectividad: Wi-Fi 6E + Celular 4G/5G para estar conectado en cualquier lugar. También incluye
+                    USB-C y Bluetooth 5.3.</p>
+                  <p><br /></p>
+                  <p>Cámaras: Cámara trasera de 12MP gran angular para fotos y videos en 4K. Cámara frontal de 12MP
+                    ultra gran angular con Center Stage para videollamadas perfectas.</p>
+                  <p><br /></p>
+      

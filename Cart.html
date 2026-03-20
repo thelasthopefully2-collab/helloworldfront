@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="es" translate="no">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi Carrito - Frávega</title>
+    <link rel="icon" href="assets/images/icon.png" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        .header {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            margin-left: 20px;
+        }
+
+        .header-logo img {
+            height: 25px;
+        }
+
+        .header-secure {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .header-secure svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .header-secure span {
+            font-size: 10px;
+            font-weight: 500;
+            color: #333;
+            letter-spacing: 0.5px;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .page-title {
+            font-size: 26px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        /* Cart Items Container */
+        #cart-items-container {
+            min-height: 200px;
+        }
+
+        /* Cart Item Row - Dynamic Items */
+        .cart-item-row {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            margin-bottom: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background: #fff;
+            gap: 20px;
+        }
+
+        .cart-item-image {
+            flex-shrink: 0;
+            width: 100px;
+            height: 100px;
+        }
+
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .cart-item-info {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .cart-item-name {
+            margin: 0 0 8px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .cart-item-vendor {
+            margin: 0 0 6px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .cart-item-vendor span {
+            color: #440099;
+        }
+
+        .cart-item-discount {
+            display: inline-block;
+            background: #e91e63;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .cart-item-price-row {
+            margin-top: 8px;
+        }
+
+        .cart-item-old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 14px;
+            margin-right: 8px;
+        }
+
+        .cart-item-price {
+            font-size: 18px;
+            font-weight: 600;
+            color: #440099;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cart-item-quantity label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .qty-controls .qty-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: #f8f8f8;
+            font-size: 20px;
+            color: #440099;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .qty-controls .qty-btn:hover:not(:disabled) {
+            background: #eee;
+        }
+
+        .qty-controls .qty-btn:disabled {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .qty-controls .qty-value {
+            min-width: 40px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 0 8px;
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+        }
+
+        .cart-item-subtotal {
+            text-align: right;
+            min-width: 120px;
+        }
+
+        .cart-item-subtotal label {
+            display: block;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-subtotal .item-subtotal {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .remove-btn {
+            width: 36px;
+            height: 36px;
+            border: 1px solid #ddd;
+            background: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            color: #999;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .remove-btn:hover {
+            background: #fee;
+            border-color: #e91e63;
+            color: #e91e63;
+        }
+
+        /* Empty Cart State */
+        .empty-cart {
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .empty-cart-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .empty-cart h3 {
+            margin: 0 0 12px;
+            font-size: 24px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .empty-cart p {
+            margin: 0 0 24px;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .empty-cart a {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #9c5fd9 0%, #7b4fb8 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        /* Loading State */
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #440099;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .content-wrapper {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        /* Cart Section */
+        .cart-section {
+            flex: 1;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+        }
+
+        .seller-header {
+            padding: 15px 20px;
+            font-size: 14px;
+            color: #440099;
+        }
+
+        .seller-header a {
+            color: #440099;
+            font-weight: 500;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            gap: 25px;
+        }
+
+        .item-image {
+            width: 90px;
+            height: 90px;
+            flex-shrink: 0;
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .item-details {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .item-name {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+
+        .item-remove {
+            color: #440099;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .item-remove:hover {
+            text-decoration: underline;
+        }
+
+        .item-dot {
+            color: #e91e63;
+            font-size: 20px;
+            margin-right: 20px;
+        }
+
+        .item-quantity {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            height: 36px;
+        }
+
+        .qty-btn {
+            width: 36px;
+            height: 100%;
+            border: none;
+            background: #fff;
+            font-size: 20px;
+            color: #440099;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 300;
+        }
+
+        .qty-btn:hover {
+            background: #f8f4ff;
+        }
+
+        .qty-value {
+            width: 40px;
+            text-align: center;
+            font-size: 14px;
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .item-price {
+            text-align: right;
+            min-width: 150px;
+        }
+
+        .price-discount {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: flex-end;
+            margin-bottom: 4px;
+        }
+
+        .discount-badge {
+            color: #e91e63;
+            font-size: 13px;
+            font-weight: 400;
+        }
+
+        .original-price {
+            color: #999;
+            font-size: 13px;
+            text-decoration: line-through;
+        }
+
+        .current-price {
+            font-size: 20px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 340px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .coupon-box {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .coupon-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px;
+            cursor: pointer;
+        }
+
+        .coupon-header span {
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .coupon-header svg {
+            width: 18px;
+            height: 18px;
+            color: #666;
+        }
+
+        .coupon-content {
+            padding: 0 20px 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .coupon-input {
+            flex: 1;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #999;
+        }
+
+        .coupon-input::placeholder {
+            color: #999;
+        }
+
+        .coupon-input:focus {
+            outline: none;
+            border-color: #440099;
+        }
+
+        .coupon-btn {
+            padding: 12px 20px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #ccc;
+            cursor: not-allowed;
+            letter-spacing: 0.5px;
+        }
+
+        .summary-box {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .summary-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #9c5fd9 0%, #7b4fb8 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #8a4fc9 0%, #6a3fa8 100%);
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 16px;
+            background: #fff;
+            color: #666;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #f9f9f9;
+            border-color: #ccc;
+        }
+
+        /* Footer */
+        .footer {
+            background: #fff;
+            padding: 40px;
+            margin-top: 50px;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-text {
+            flex: 1;
+        }
+
+        .footer-text img {
+            height: 33px;
+            margin-bottom: 20px;
+        }
+
+        .footer-text p {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .footer-logos {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .footer-logos img {
+            height: 50px;
+        }
+
+        @media (max-width: 900px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .cart-item {
+                flex-wrap: wrap;
+            }
+
+            .item-price {
+                width: 100%;
+                text-align: left;
+                margin-top: 15px;
+            }
+
+            .item-dot {
+                display: none;
+            }
+
+            /* Dynamic cart items responsive */
+            .cart-item-row {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .cart-item-info {
+                flex: 1 1 calc(100% - 130px);
+            }
+
+            .cart-item-quantity {
+                flex: 1;
+            }
+
+            .cart-item-subtotal {
+                flex: 1;
+                text-align: left;
+            }
+
+            .remove-btn {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+            }
+
+            .cart-item-row {
+                position: relative;
+                padding-right: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <img src="assets/images/Logo.webp" alt="Frávega" />
+        </a>
+        <div class="header-secure">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <span data-i18n="cart.securesite">SITIO SEGURO</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <h1 class="page-title" data-i18n="cart.pageTitle">Mi carrito</h1>
+
+        <div class="content-wrapper">
+            <!-- Cart Section -->
+            <section class="cart-section">
+                <div id="cart-items-container">
+                    <!-- Cart items will be loaded dynamically by cart.js -->
+                    <div style="padding:20px; text-align:center;" data-i18n="cart.loading">Cargando carrito...</div>
+                </div>
+            </section>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="coupon-box">
+                    <div class="coupon-header">
+                        <span data-i18n="cart.couponTitle">Cupón de descuento</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="18 15 12 9 6 15"></polyline>
+                        </svg>
+                    </div>
+                    <div class="coupon-content">
+                        <input type="text" class="coupon-input" placeholder="Ingresar cupón"
+                            data-i18n-placeholder="cart.couponPlaceholder" />
+                        <button class="coupon-btn" data-i18n="cart.couponBtn">AGREGAR</button>
+                    </div>
+                </div>
+
+                <div class="summary-box">
+                    <h3 class="summary-title" data-i18n="cart.summaryTitle">Resumen de compra</h3>
+                    <div class="summary-row">
+                        <span><span data-i18n="cart.products">Productos</span> (<span id="cart-count">0</span>)</span>
+                        <span id="cart-subtotal">$0</span>
+                    </div>
+                    <div class="summary-row" id="savings-row" style="display:none; color:#00a650;">
+                        <span data-i18n="cart.totalSavings">Ahorro total</span>
+                        <span id="cart-savings">$0</span>
+                    </div>
+                    <div class="summary-total">
+                        <span data-i18n="cart.total">Total</span>
+                        <span id="cart-total">$0</span>
+                    </div>
+                    <p id="cart-installments"
+                        style="font-size:13px; color:#00a650; margin-bottom:20px; text-align:center;"></p>
+                    <button class="btn-primary" id="checkout-btn" data-i18n="cart.checkout">Finalizar compra</button>
+                    <a href="index.html">
+                        <button class="btn-secondary" data-i18n="cart.continueShopping">Continuar comprando</button>
+                    </a>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                <img src="assets/images/Logo.webp" alt="Frávega" />
+                <p data-i18n="cartFooter.copyright">Copyright 1972-2024 | Todos los derechos reservados Fravega.com.
+                    Frávega S.A.C.I. e I. Valentín Gómez 2813 (1191) | Capital Federal | Argentina</p>
+                <p data-i18n="cartFooter.disclaimer">Las fotos son a modo ilustrativo. La venta de cualquiera de los
+                    productos publicados está sujeta a la verificación de stock.</p>
+            </div>
+            <div class="footer-logos">
+                <img src="https://images.fravega.com/f300/84e015d55939d4f5961bf5dcb4989d78.png" alt="CAECE" />
+                <img src="https://www.argentina.gob.ar/sites/default/files/aaip-isologo.png" alt="AAIP"
+                    style="height: 40px;" />
+                <img src="https://images.fravega.com/f300/32cbb64340160607a44b6b5c35688bd6.png" alt="Data Fiscal"
+                    style="height: 45px;" />
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/cart-notification.js"></script>
+    <script src="assets/js/cart.js"></script>
+    <!-- Translation System -->
+    <script src="assets/js/translations.js"></script>
+    <script src="assets/js/i18n.js"></script>
+</body>
+
+</html>

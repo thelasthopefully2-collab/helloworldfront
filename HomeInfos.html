@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="es" translate="no">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dirección de Entrega - Frávega</title>
+    <link rel="icon" href="assets/images/icon.png" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        .header {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            margin-left: 20px;
+        }
+
+        .header-logo img {
+            height: 25px;
+        }
+
+        .header-secure {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .header-secure svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .header-secure span {
+            font-size: 10px;
+            font-weight: 500;
+            color: #666;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .back-link {
+            color: #440099;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .content-wrapper {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        /* Form Section */
+        .form-section {
+            flex: 1;
+        }
+
+        /* Step completed */
+        .step-completed {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .step-completed-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .step-check {
+            width: 32px;
+            height: 32px;
+            background: #00a650;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step-completed-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .step-completed-info p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .step-edit {
+            color: #440099;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .step-edit:hover {
+            text-decoration: underline;
+        }
+
+        /* Current Step */
+        .step-box {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 25px;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: #00a650;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .step-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #440099;
+        }
+
+        .step-content {
+            padding: 25px;
+            border-top: 1px solid #eee;
+        }
+
+        /* Delivery Options */
+        .delivery-option {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .delivery-option:hover {
+            border-color: #440099;
+        }
+
+        .delivery-option.selected {
+            border-color: #440099;
+            background: #f8f4ff;
+        }
+
+        .delivery-option-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .delivery-radio {
+            width: 20px;
+            height: 20px;
+            accent-color: #440099;
+        }
+
+        .delivery-title {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .delivery-price {
+            margin-left: auto;
+            font-size: 16px;
+            font-weight: 600;
+            color: #00a650;
+        }
+
+        .delivery-info {
+            margin-left: 32px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Address Form */
+        .address-form {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid #eee;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            color: #440099;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #440099;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .btn-continue {
+            width: 100%;
+            padding: 14px;
+            background: #440099;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: background 0.3s;
+        }
+
+        .btn-continue:hover {
+            background: #330077;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .product-preview {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .product-preview-image {
+            width: 70px;
+            height: 70px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .product-preview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .product-qty {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #e91e63;
+            color: #fff;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-preview-info h4 {
+            font-size: 14px;
+            font-weight: 400;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .product-preview-price {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-top: 8px;
+        }
+
+        .coupon-box {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .coupon-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            cursor: pointer;
+        }
+
+        .coupon-header span {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .coupon-header svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .coupon-content {
+            padding: 0 20px 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .coupon-input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .coupon-btn {
+            padding: 10px 20px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        .summary-box {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .summary-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .btn-checkout-disabled {
+            width: 100%;
+            padding: 14px;
+            background: #f0e6ff;
+            color: #b39ddb;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: not-allowed;
+        }
+
+        /* Footer */
+        .footer {
+            background: #fff;
+            padding: 40px;
+            margin-top: 50px;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-text {
+            flex: 1;
+        }
+
+        .footer-text img {
+            height: 33px;
+            margin-bottom: 20px;
+        }
+
+        .footer-text p {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .footer-logos {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .footer-logos img {
+            height: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .form-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <img src="assets/images/Logo.webp" alt="Frávega" />
+        </a>
+        <div class="header-secure">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <span>SITIO SEGURO</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">Finalizar la compra</h1>
+            <a href="/infos" class="back-link">Volver</a>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Form Section -->
+            <section class="form-section">
+                <!-- Step 1 Completed -->
+                <div class="step-completed">
+                    <div class="step-completed-left">
+                        <div class="step-check">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="step-completed-info">
+                            <h3>Datos Personales y Tipo de Factura</h3>
+                            <p id="customerSummary">Consumidor Final</p>
+                        </div>
+                    </div>
+                    <a href="/infos" class="step-edit">Editar</a>
+                </div>
+
+                <!-- Step 2 - Current -->
+                <div class="step-box">
+                    <div class="step-header">
+                        <div class="step-number">2</div>
+                        <h2 class="step-title">Dirección de Entrega</h2>
+                    </div>
+                    <div class="step-content">
+                        <!-- Delivery Options -->
+                        <div class="delivery-option selected">
+                            <div class="delivery-option-header">
+                                <input type="radio" name="delivery" class="delivery-radio" checked />
+                                <span class="delivery-title">Envío a domicilio</span>
+                                <span class="delivery-price">Gratis</span>
+                            </div>
+                            <p class="delivery-info">Llega entre el 5 y 10 de febrero</p>
+                        </div>
+
+                        <div class="delivery-option">
+                            <div class="delivery-option-header">
+                                <input type="radio" name="delivery" class="delivery-radio" />
+                                <span class="delivery-title">Retiro en sucursal</span>
+                                <span class="delivery-price">Gratis</span>
+                            </div>
+                            <p class="delivery-info">Disponible en 24-48 horas</p>
+                        </div>
+
+                        <!-- Address Form -->
+                        <form class="address-form" id="shippingForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Provincia</label>
+                                    <select class="form-select" id="provinceField" required>
+                                        <option value="">Seleccionar provincia</option>
+                                        <option value="Buenos Aires">Buenos Aires</option>
+                                        <option value="CABA">CABA</option>
+                                        <option value="Córdoba">Córdoba</option>
+                                        <option value="Santa Fe">Santa Fe</option>
+                                        <option value="Mendoza">Mendoza</option>
+                                        <option value="Tucumán">Tucumán</option>
+                                        <option value="Entre Ríos">Entre Ríos</option>
+                                        <option value="Salta">Salta</option>
+                                        <option value="Misiones">Misiones</option>
+                                        <option value="Chaco">Chaco</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Ciudad</label>
+                                    <input type="text" class="form-input" id="cityField" placeholder="" required />
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Calle</label>
+                                    <input type="text" class="form-input" id="streetField" placeholder="" required />
+                                </div>
+                                <div class="form-group" style="flex: 0.4;">
+                                    <label class="form-label">Número</label>
+                                    <input type="text" class="form-input" id="numberField" placeholder="" required />
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Piso (opcional)</label>
+                                    <input type="text" class="form-input" id="floorField" placeholder="" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Departamento (opcional)</label>
+                                    <input type="text" class="form-input" id="apartmentField" placeholder="" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Código Postal</label>
+                                <input type="text" class="form-input" id="postalCodeField" placeholder="" required style="max-width: 200px;" />
+                            </div>
+
+                            <div class="form-group" style="margin-top: 20px;">
+                                <label class="form-label">Comentarios para la entrega (opcional)</label>
+                                <input type="text" class="form-input" id="additionalInfoField" placeholder="Ej: Tocar timbre 2B" />
+                            </div>
+
+                            <button type="submit" class="btn-continue" id="continueBtn">CONTINUAR</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div id="productPreviewContainer"></div>
+
+                <div class="coupon-box">
+                    <div class="coupon-header">
+                        <span>Cupón de descuento</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="18 15 12 9 6 15"></polyline>
+                        </svg>
+                    </div>
+                    <div class="coupon-content">
+                        <input type="text" class="coupon-input" id="couponInput" placeholder="Ingresar cupón" />
+                        <button class="coupon-btn" id="couponBtn">AGREGAR</button>
+                    </div>
+                </div>
+
+                <div class="summary-box" id="summaryBox"></div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                <img src="assets/images/Logo.webp" alt="Frávega" />
+                <p>Copyright 1972-2024 | Todos los derechos reservados Fravega.com. Frávega S.A.C.I. e I. Valentín Gómez 2813 (1191) | Capital Federal | Argentina</p>
+                <p>Las fotos son a modo ilustrativo. La venta de cualquiera de los productos publicados está sujeta a la verificación de stock.</p>
+            </div>
+            <div class="footer-logos">
+                <img src="https://images.fravega.com/f300/84e015d55939d4f5961bf5dcb4989d78.png" alt="CAECE" />
+                <img src="https://www.argentina.gob.ar/sites/default/files/aaip-isologo.png" alt="AAIP" style="height: 40px;" />
+                <img src="https://images.fravega.com/f300/32cbb64340160607a44b6b5c35688bd6.png" alt="Data Fiscal" style="height: 45px;" />
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/checkout.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Get form elements
+            const form = document.getElementById('shippingForm');
+            const customerSummary = document.getElementById('customerSummary');
+            const productPreviewContainer = document.getElementById('productPreviewContainer');
+            const summaryBox = document.getElementById('summaryBox');
+            const continueBtn = document.getElementById('continueBtn');
+            const couponInput = document.getElementById('couponInput');
+            const couponBtn = document.getElementById('couponBtn');
+            const deliveryOptions = document.querySelectorAll('.delivery-option');
+            const deliveryRadios = document.querySelectorAll('.delivery-radio');
+
+            CheckoutAPI.showLoading('Cargando datos de envío...');
+
+            try {
+                // Load order data
+                let order = await CheckoutAPI.getPendingOrder();
+                
+                if (!order) {
+                    CheckoutAPI.hideLoading();
+                    CheckoutAPI.showToast('No se encontró una orden. Iniciando nuevamente...', true);
+                    setTimeout(() => window.location.href = 'Email.html', 1500);
+                    return;
+                }
+
+                // Show customer summary
+                if (order.customer) {
+                    const invoiceLabels = {
+                        'consumidor_final': 'Consumidor Final',
+                        'responsable_inscripto': 'Responsable Inscripto',
+                        'monotributista': 'Monotributista'
+                    };
+                    const name = `${order.customer.firstName || ''} ${order.customer.lastName || ''}`.trim();
+                    customerSummary.textContent = `${name} - ${invoiceLabels[order.customer.invoiceType] || 'Consumidor Final'}`;
+                }
+
+                // Pre-fill shipping if exists
+                if (order.shipping && order.shipping.address) {
+                    const addr = order.shipping.address;
+                document.getElementById('provinceField').value = addr.province || '';
+                document.getElementById('cityField').value = addr.city || '';
+                document.getElementById('streetField').value = addr.street || '';
+                document.getElementById('numberField').value = addr.number || '';
+                document.getElementById('floorField').value = addr.floor || '';
+                document.getElementById('apartmentField').value = addr.apartment || '';
+                document.getElementById('postalCodeField').value = addr.postalCode || '';
+                document.getElementById('additionalInfoField').value = addr.additionalInfo || '';
+            }
+
+            // Render product preview
+            CheckoutAPI.renderProductPreview(order.items, productPreviewContainer);
+            
+            // Render order summary
+            CheckoutAPI.renderOrderSummary(order, summaryBox);
+
+            CheckoutAPI.hideLoading();
+
+            } catch (error) {
+                CheckoutAPI.hideLoading();
+                CheckoutAPI.showToast('Error al cargar los datos', true);
+                console.error('Error loading shipping:', error);
+            }
+
+            // Handle delivery option selection
+            deliveryOptions.forEach((option, index) => {
+                option.addEventListener('click', function() {
+                    deliveryOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    deliveryRadios[index].checked = true;
+                });
+            });
+
+            // Handle coupon
+            couponBtn.addEventListener('click', async function() {
+                const code = couponInput.value.trim();
+                if (!code) return;
+                
+                try {
+                    couponBtn.disabled = true;
+                    const result = await CheckoutAPI.applyCoupon(code);
+                    order.discount = result.discount;
+                    order.total = result.total;
+                    CheckoutAPI.renderOrderSummary(order, summaryBox);
+                    couponBtn.textContent = '✓';
+                    couponBtn.style.background = '#00a650';
+                    couponBtn.style.color = '#fff';
+                    CheckoutAPI.showToast('¡Cupón aplicado!');
+                } catch (error) {
+                    CheckoutAPI.showToast(error.message, true);
+                    couponBtn.disabled = false;
+                }
+            });
+
+            // Handle form submission
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const selectedDelivery = document.querySelector('.delivery-option.selected');
+                const isHomeDelivery = selectedDelivery === deliveryOptions[0];
+
+                const shippingData = {
+                    method: isHomeDelivery ? 'home_delivery' : 'store_pickup',
+                    address: {
+                        province: document.getElementById('provinceField').value,
+                        city: document.getElementById('cityField').value,
+                        street: document.getElementById('streetField').value,
+                        number: document.getElementById('numberField').value,
+                        floor: document.getElementById('floorField').value,
+                        apartment: document.getElementById('apartmentField').value,
+                        postalCode: document.getElementById('postalCodeField').value,
+                        additionalInfo: document.getElementById('additionalInfoField').value
+                    },
+                    cost: 0 // Free shipping
+                };
+
+                // Validate required fields
+                if (!shippingData.address.province || !shippingData.address.city || 
+                    !shippingData.address.street || !shippingData.address.number || 
+                    !shippingData.address.postalCode) {
+                    CheckoutAPI.showToast('Por favor completa todos los campos obligatorios', true);
+                    return;
+                }
+
+                try {
+                    continueBtn.disabled = true;
+                    continueBtn.textContent = 'Procesando...';
+                    CheckoutAPI.showLoading('Guardando dirección de envío...');
+                    
+                    await CheckoutAPI.saveShippingInfo(shippingData);
+                    window.location.href = 'CardDetails.html';
+                } catch (error) {
+                    CheckoutAPI.hideLoading();
+                    CheckoutAPI.showToast('Error al guardar: ' + error.message, true);
+                    continueBtn.disabled = false;
+                    continueBtn.textContent = 'CONTINUAR';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
