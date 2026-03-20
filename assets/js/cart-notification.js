@@ -1,7 +1,7 @@
 // Cart Notification & Badge Handler
 // This script handles cart count badge and product added notifications across all pages
 
-const CART_API_BASE = 'http://localhost:3000/api';
+const CART_API_BASE = 'helloworldbackend-production-ed49.up.railway.app';
 
 // Get or create session ID
 function getCartSessionId() {
