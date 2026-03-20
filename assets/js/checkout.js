@@ -1,5 +1,5 @@
 // Checkout API Handler for Frávega Clone
-const API_BASE = 'http://localhost:3000/api';
+const API_BASE = 'helloworldbackend-production-ed49.up.railway.app';
 
 // Session management
 function getSessionId() {
